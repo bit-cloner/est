@@ -148,7 +148,7 @@ func main() {
 			// Add code to install 3 addons
 			err = InstallAddons(context.Background(), region, clusterName)
 			if err != nil {
-				log.Fatalf("Error installing addons: %v", err)
+				log.Fatalf("Error installing addons:( %v", err)
 			}
 		}
 
