@@ -17,6 +17,7 @@
 !/github/workflows/go.yml
 !install.sh
 !install.ps1
+!.github/*
 # add more files as needed above this line
 
 !README.md
