@@ -34,7 +34,7 @@ jobs:
 
       # 3) Build & release the Go binary
       - name: Build & release
-        uses: wangyoucao577/go-release-action@v1.53
+        uses: wangyoucao577/go-release-action@v1.3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           goos: ${{ matrix.goos }}
