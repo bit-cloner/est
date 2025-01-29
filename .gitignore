@@ -14,7 +14,7 @@
 !go.sum
 !go.mod
 !healthcheck.gif
-!/.github/worflows/go.yml
+!/github/workflows/go.yml
 !install.sh
 !install.ps1
 # add more files as needed above this line
