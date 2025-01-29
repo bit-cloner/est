@@ -639,13 +639,15 @@ func DeleteVPC(ctx context.Context, region, vpcID string) error {
 			Force:        aws.Bool(true),
 		})
 		if err != nil {
-			return fmt.Errorf("unable to detach network interface %s: %v", *eni.NetworkInterfaceId, err)
+			fmt.Printf("unable to detach network interface %s: %v", *eni.NetworkInterfaceId, err)
+			continue
 		}
 		_, err = ec2Client.DeleteNetworkInterface(ctx, &ec2.DeleteNetworkInterfaceInput{
 			NetworkInterfaceId: eni.NetworkInterfaceId,
 		})
 		if err != nil {
-			return fmt.Errorf("unable to delete network interface %s: %v", *eni.NetworkInterfaceId, err)
+			fmt.Printf("unable to delete network interface %s: %v", *eni.NetworkInterfaceId, err)
+			continue
 		}
 	}
 
