@@ -5,41 +5,37 @@ on:
     types: [created]
 
 jobs:
-  releases-matrix:
-    name: Release Go Binary
-    runs-on: ubuntu-latest
+  build:
     strategy:
       matrix:
-        # build and publish in parallel:
-        # linux/386, linux/amd64, linux/arm64, windows/386, windows/amd64, darwin/amd64, darwin/arm64
-        goos: [linux, windows, darwin]
-        goarch: ["386", amd64, arm64]
-        exclude:
-          - goarch: "386"
-            goos: darwin
-          - goarch: arm64
-            goos: windows
-
+        platform:
+          - runs-on: ubuntu-latest
+            GOOS: linux
+            GOARCH: amd64
+          - runs-on: ubuntu-latest
+            GOOS: linux
+            GOARCH: arm64
+          - runs-on: ubuntu-latest
+            GOOS: darwin
+            GOARCH: amd64
+          - runs-on: ubuntu-latest
+            GOOS: darwin
+            GOARCH: arm64
+          - runs-on: ubuntu-latest
+            GOOS: windows
+            GOARCH: amd64
+    runs-on: ${{ matrix.platform.runs-on }}
+    env:
+      GOOS: ${{ matrix.platform.GOOS }}
+      GOARCH: ${{ matrix.platform.GOARCH }}
+      CGO_ENABLED: 0
+    timeout-minutes: 10
     steps:
-      # 1) Read go_version from release.json
-      - name: Read go_version from release.json
-        uses: notiz-dev/github-action-json-property@release
-        id: go_version
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
         with:
-          path: 'release.json'
-          prop_path: 'go_version'
-
-      # 2) Check out code
-      - uses: actions/checkout@v3
-
-      # 3) Build & release the Go binary
-      - name: Build & release
-        uses: wangyoucao577/go-release-action@v1.3
+          go-version-file: go.mod
+      - run: go build
+      - uses: int128/go-release-action@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          goos: ${{ matrix.goos }}
-          goarch: ${{ matrix.goarch }}
-          # Instead of a URL, specify just the version string (e.g., "1.20.7").
-          goversion: "https://dl.google.com/go/go${{ steps.go_version.outputs.prop }}.linux-amd64.tar.gz"
-          # Adjust the binary name as needed
-          binary_name: "est"
+          binary: est
