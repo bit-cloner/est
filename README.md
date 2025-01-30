@@ -38,7 +38,7 @@ Download the appropriate binary for your operating system and CPU architecture:
 # For Intel-based Macs (amd64)
 VERSION=$(curl -sL -o /dev/null -w %{url_effective} https://github.com/bit-cloner/est/releases/latest | sed 's#.*/v##');
 
-curl -LO https://github.com/bit-cloner/est/releases/latest/download/est-VERSION-darwin-amd64.tar.gz
+curl -LO https://github.com/bit-cloner/est/releases/latest/download/est-$VERSION-darwin-amd64.tar.gz
 
 tar -xzf est-$VERSION-darwin-amd64.tar.gz
 chmod +x est
@@ -47,7 +47,7 @@ chmod +x est
 # For Apple Silicon Macs (arm64)
 VERSION=$(curl -sL -o /dev/null -w %{url_effective} https://github.com/bit-cloner/est/releases/latest | sed 's#.*/v##');
 
-curl -LO https://github.com/bit-cloner/est/releases/latest/download/est-VERSION-darwin-arm64.tar.gz
+curl -LO https://github.com/bit-cloner/est/releases/latest/download/est-$VERSION-darwin-arm64.tar.gz
 
 tar -xzf est-$VERSION-darwin-arm64.tar.gz
 
@@ -59,7 +59,7 @@ chmod +x est
 # For x86_64 systems
 VERSION=$(curl -sL -o /dev/null -w %{url_effective} https://github.com/bit-cloner/est/releases/latest | sed 's#.*/v##');
 
-curl -LO https://github.com/bit-cloner/est/releases/latest/download/est-VERSION-linux-amd64.tar.gz
+curl -LO https://github.com/bit-cloner/est/releases/latest/download/est-$VERSION-linux-amd64.tar.gz
 
 tar -xzf est-$VERSION-linux-amd64.tar.gz
 
@@ -69,7 +69,7 @@ chmod +x est
 # For ARM64 systems
 VERSION=$(curl -sL -o /dev/null -w %{url_effective} https://github.com/bit-cloner/est/releases/latest | sed 's#.*/v##');
 
-curl -LO https://github.com/bit-cloner/est/releases/latest/download/est-VERSION-linux-arm64.tar.gz
+curl -LO https://github.com/bit-cloner/est/releases/latest/download/est-V$ERSION-linux-arm64.tar.gz
 
 tar -xzf est-$VERSION-linux-amd64.tar.gz
 
@@ -82,14 +82,14 @@ chmod +x est
 # For 64-bit systems
 $VERSION = (Invoke-WebRequest -Uri "https://github.com/bit-cloner/est/releases/latest" -UseBasicParsing).BaseResponse.ResponseUri -replace '.*/v'
 
-Invoke-WebRequest -Uri https://github.com/bit-cloner/est/releases/latest/download/est-VERSION-windows-amd64.zip -OutFile est.zip
+Invoke-WebRequest -Uri https://github.com/bit-cloner/est/releases/latest/download/est-$VERSION-windows-amd64.zip -OutFile est.zip
 
 Expand-Archive -Path est.zip -DestinationPath .
 
 # For 32-bit systems
 $VERSION = (Invoke-WebRequest -Uri "https://github.com/bit-cloner/est/releases/latest" -UseBasicParsing).BaseResponse.ResponseUri -replace '.*/v'
 
-Invoke-WebRequest -Uri https://github.com/bit-cloner/est/releases/latest/download/est-VERSION-windows-386.zip -OutFile est.zip
+Invoke-WebRequest -Uri https://github.com/bit-cloner/est/releases/latest/download/est-$VERSION-windows-386.zip -OutFile est.zip
 
 Expand-Archive -Path est.zip -DestinationPath .
 ```
