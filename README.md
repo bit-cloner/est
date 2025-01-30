@@ -1,6 +1,6 @@
 # EKS Sandbox Tool
 
-A command-line interface (CLI) tool for creating and managing Amazon EKS (Elastic Kubernetes Service) sandbox environments with isolated networking.
+A command-line interface (CLI) tool for quickly creating and deleting Amazon EKS  sandbox environments with isolated networking. Used for POC and troubleshooting tasks.
 
 ## Features
 
@@ -9,10 +9,10 @@ A command-line interface (CLI) tool for creating and managing Amazon EKS (Elasti
   - Public subnets across two availability zones
   - Internet Gateway for external connectivity
   - Route tables and security groups
-  - EKS cluster with latest available Kubernetes version
+  - EKS cluster with Latest or specific  Kubernetes version
   - Required IAM roles and policies
 
-- **Auto Mode Support**: Option to enable AWS EKS autopilot-like features:
+- **Auto Mode Support**: Option to enable AWS EKS Auto mode features:
   - Managed compute
   - Managed storage
   - Load balancer integration
@@ -36,31 +36,52 @@ Download the appropriate binary for your operating system and CPU architecture:
 ### macOS
 ```sh
 # For Intel-based Macs (amd64)
-curl -LO https://github.com/yourusername/eks-sandbox/releases/latest/download/est-VERSION-darwin-amd64.tar.gz
+VERSION=$(curl -sL -o /dev/null -w %{url_effective} https://github.com/bit-cloner/est/releases/latest | sed 's#.*/v##');
+curl -LO https://github.com/bit-cloner/est/releases/latest/download/est-VERSION-darwin-amd64.tar.gz
+tar -xzf est-$VERSION-darwin-amd64.tar.gz
+chmod +x est
 
 # For Apple Silicon Macs (arm64)
-curl -LO https://github.com/yourusername/eks-sandbox/releases/latest/download/est-VERSION-darwin-arm64.tar.gz
+VERSION=$(curl -sL -o /dev/null -w %{url_effective} https://github.com/bit-cloner/est/releases/latest | sed 's#.*/v##');
+curl -LO https://github.com/bit-cloner/est/releases/latest/download/est-VERSION-darwin-arm64.tar.gz
+tar -xzf est-$VERSION-darwin-arm64.tar.gz
+chmod +x est
 ```
 
 ### Linux
 ```sh
 # For x86_64 systems
-curl -LO https://github.com/yourusername/eks-sandbox/releases/latest/download/est-VERSION-linux-amd64.tar.gz
+VERSION=$(curl -sL -o /dev/null -w %{url_effective} https://github.com/bit-cloner/est/releases/latest | sed 's#.*/v##');
+curl -LO https://github.com/bit-cloner/est/releases/latest/download/est-VERSION-linux-amd64.tar.gz
+tar -xzf est-$VERSION-linux-amd64.tar.gz
+chmod +x est
+
 
 # For ARM64 systems
-curl -LO https://github.com/yourusername/eks-sandbox/releases/latest/download/est-VERSION-linux-arm64.tar.gz
+VERSION=$(curl -sL -o /dev/null -w %{url_effective} https://github.com/bit-cloner/est/releases/latest | sed 's#.*/v##');
+curl -LO https://github.com/bit-cloner/est/releases/latest/download/est-VERSION-linux-arm64.tar.gz
+tar -xzf est-$VERSION-linux-amd64.tar.gz
+chmod +x est
+
 ```
 
 ### Windows
 ```sh
 # For 64-bit systems
-Invoke-WebRequest -Uri https://github.com/yourusername/eks-sandbox/releases/latest/download/est-VERSION-windows-amd64.zip -OutFile est.zip
+$VERSION = (Invoke-WebRequest -Uri "https://github.com/bit-cloner/est/releases/latest" -UseBasicParsing).BaseResponse.ResponseUri -replace '.*/v'
+Invoke-WebRequest -Uri https://github.com/bit-cloner/est/releases/latest/download/est-VERSION-windows-amd64.zip -OutFile est.zip
+Expand-Archive -Path est.zip -DestinationPath .
 
 # For 32-bit systems
-Invoke-WebRequest -Uri https://github.com/yourusername/eks-sandbox/releases/latest/download/est-VERSION-windows-386.zip -OutFile est.zip
+$VERSION = (Invoke-WebRequest -Uri "https://github.com/bit-cloner/est/releases/latest" -UseBasicParsing).BaseResponse.ResponseUri -replace '.*/v'
+Invoke-WebRequest -Uri https://github.com/bit-cloner/est/releases/latest/download/est-VERSION-windows-386.zip -OutFile est.zip
+Expand-Archive -Path est.zip -DestinationPath .
 ```
 
-Extract the downloaded archive and move the binary to a location in your system PATH.
+### Usage
+```
+./est
+```
 
 ## Prerequisites
 
