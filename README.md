@@ -114,7 +114,7 @@ Expand-Archive -Path est.zip -DestinationPath .
 Follow the interactive prompts to:
 
 1. Select "Create Cluster"
-2. Enter AWS region (defaults to `eu-west-2`)
+2. Enter AWS region (defaults to `eu-west-1`)
 3. Provide cluster name
 4. Choose Kubernetes version (defaults to latest available)
 5. Enable/disable auto mode

@@ -63,6 +63,10 @@ for TARGET in "${TARGETS[@]}"; do
     GOOS="$OS" GOARCH="$ARCH" go build -o "${RELEASE_DIR}/${OUTPUT_NAME}.exe" *.go
     zip -j "${RELEASE_DIR}/${OUTPUT_NAME}.zip" "${RELEASE_DIR}/${OUTPUT_NAME}.exe"
     rm "${RELEASE_DIR}/${OUTPUT_NAME}.exe"
+  elif [[ "$OS" == "darwin" ]]; then
+    GOOS="$OS" GOARCH="$ARCH" go build -o "${RELEASE_DIR}/${OUTPUT_NAME}" *.go
+    gtar -czf "${RELEASE_DIR}/${OUTPUT_NAME}.tar.gz" -C "$RELEASE_DIR" "$OUTPUT_NAME"
+    rm "${RELEASE_DIR}/${OUTPUT_NAME}"
   else
     GOOS="$OS" GOARCH="$ARCH" go build -o "${RELEASE_DIR}/${OUTPUT_NAME}" *.go
     tar -czf "${RELEASE_DIR}/${OUTPUT_NAME}.tar.gz" -C "$RELEASE_DIR" "$OUTPUT_NAME"
