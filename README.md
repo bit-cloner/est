@@ -33,19 +33,10 @@ A command-line interface (CLI) tool for quickly creating and deleting Amazon EKS
 
 Download the appropriate binary for your operating system and CPU architecture:
 
-### macOS
+
+### For Apple Silicon MAC OS (arm64)
+
 ```sh
-# For Intel-based Macs (amd64)
-VERSION=$(curl -sL -o /dev/null -w %{url_effective} https://github.com/bit-cloner/est/releases/latest | sed 's#.*/tag/##')
-
-
-curl -LO https://github.com/bit-cloner/est/releases/download/$VERSION/est-$VERSION-darwin-amd64.tar.gz
-
-tar -xzf est-$VERSION-darwin-amd64.tar.gz
-chmod +x est
-
-
-# For Apple Silicon Macs (arm64)
 VERSION=$(curl -sL -o /dev/null -w %{url_effective} https://github.com/bit-cloner/est/releases/latest | sed 's#.*/tag/##')
 
 
@@ -56,9 +47,25 @@ tar -xzf est-$VERSION-darwin-arm64.tar.gz
 chmod +x est
 ```
 
-### Linux
+# For Intel-based Macs (amd64)
 ```sh
-# For x86_64 systems
+# For Intel-based Macs (amd64)
+VERSION=$(curl -sL -o /dev/null -w %{url_effective} https://github.com/bit-cloner/est/releases/latest | sed 's#.*/tag/##')
+
+
+curl -LO https://github.com/bit-cloner/est/releases/download/$VERSION/est-$VERSION-darwin-amd64.tar.gz
+
+tar -xzf est-$VERSION-darwin-amd64.tar.gz
+chmod +x est
+```
+
+
+
+### Linux
+
+### For x86_64 systems
+```sh
+
 VERSION=$(curl -sL -o /dev/null -w %{url_effective} https://github.com/bit-cloner/est/releases/latest | sed 's#.*/tag/##')
 
 
@@ -68,8 +75,9 @@ tar -xzf est-$VERSION-linux-amd64.tar.gz
 
 chmod +x est
 
-
-# For ARM64 systems
+```
+### For ARM64 systems
+```sh
 VERSION=$(curl -sL -o /dev/null -w %{url_effective} https://github.com/bit-cloner/est/releases/latest | sed 's#.*/tag/##')
 
 
