@@ -45,9 +45,11 @@ curl -LO https://github.com/bit-cloner/est/releases/download/$VERSION/est-$VERSI
 tar -xzf est-$VERSION-darwin-arm64.tar.gz
 
 chmod +x est
+
+./est
 ```
 
-# For Intel-based MAC OS
+### For Intel-based MAC OS
 ```sh
 VERSION=$(curl -sL -o /dev/null -w %{url_effective} https://github.com/bit-cloner/est/releases/latest | sed 's#.*/tag/##')
 
@@ -56,11 +58,13 @@ curl -LO https://github.com/bit-cloner/est/releases/download/$VERSION/est-$VERSI
 
 tar -xzf est-$VERSION-darwin-amd64.tar.gz
 chmod +x est
+
+./est
 ```
 
 
 
-### Linux
+## Linux
 
 ### For x86_64 systems
 ```sh
@@ -74,6 +78,8 @@ tar -xzf est-$VERSION-linux-amd64.tar.gz
 
 chmod +x est
 
+./est
+
 ```
 ### For ARM64 systems
 ```sh
@@ -86,9 +92,11 @@ tar -xzf est-$VERSION-linux-amd64.tar.gz
 
 chmod +x est
 
+./est
+
 ```
 
-### Windows
+## Windows
 ```sh
 # For 64-bit systems
 $VERSION = (Invoke-WebRequest -Uri "https://github.com/bit-cloner/est/releases/latest" -UseBasicParsing).BaseResponse.ResponseUri -replace ".*/tag/", ""
@@ -103,11 +111,6 @@ $VERSION = (Invoke-WebRequest -Uri "https://github.com/bit-cloner/est/releases/l
 Invoke-WebRequest -Uri https://github.com/bit-cloner/est/releases/download/$VERSION/est-$VERSION-windows-386.zip -OutFile est.zip
 
 Expand-Archive -Path est.zip -DestinationPath .
-```
-
-### Usage
-```
-./est
 ```
 
 ## Prerequisites
