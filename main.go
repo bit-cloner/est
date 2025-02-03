@@ -23,13 +23,40 @@ func main() {
 
 	switch action {
 	case "Create Cluster":
-		// Prompt for AWS region
-		promptRegion := &survey.Input{
-			Message: "Enter the AWS region default:",
-			Default: "eu-west-2",
+		// Create a list of regions
+		regionNames := []string{
+			"us-east-1",
+			"us-east-2",
+			"us-west-1",
+			"us-west-2",
+			"af-south-1",
+			"ap-east-1",
+			"ap-south-1",
+			"ap-northeast-3",
+			"ap-northeast-2",
+			"ap-southeast-1",
+			"ap-southeast-2",
+			"ca-central-1",
+			"eu-central-1",
+			"eu-west-1",
+			"eu-west-2",
+			"eu-south-1",
+			"eu-west-3",
+			"eu-north-1",
+			"me-south-1",
+			"sa-east-1",
 		}
-		if err := survey.AskOne(promptRegion, &region); err != nil {
-			log.Fatalf("Error: %v", err)
+		var region string
+		prompt := &survey.Select{
+			Message:  "Select a region:",
+			Options:  regionNames,
+			Default:  "eu-west-1",
+			PageSize: 15,
+		}
+		err := survey.AskOne(prompt, &region)
+		if err != nil {
+			fmt.Println("Failed to get user input:", err)
+			log.Fatalf("Failed to get user input: %v", err)
 		}
 
 		// Prompt for EKS Cluster Name

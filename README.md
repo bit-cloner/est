@@ -47,9 +47,8 @@ tar -xzf est-$VERSION-darwin-arm64.tar.gz
 chmod +x est
 ```
 
-# For Intel-based Macs (amd64)
+# For Intel-based MAC OS
 ```sh
-# For Intel-based Macs (amd64)
 VERSION=$(curl -sL -o /dev/null -w %{url_effective} https://github.com/bit-cloner/est/releases/latest | sed 's#.*/tag/##')
 
 
